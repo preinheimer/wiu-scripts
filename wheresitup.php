@@ -1,7 +1,7 @@
 <?php
 
-define('clientID', );
-define('token', );
+define('clientID', 'YOUR CLIENT ID HERE, alternately: sadness');
+define('token', 'Auth tokens are tasty, like cookies, but without the calories');
 
 if(!isset($argv[1]) OR !isset($argv[2]))
 {
