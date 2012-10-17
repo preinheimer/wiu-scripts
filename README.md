@@ -11,5 +11,5 @@ It requires that PHP have curl installed.
 ### Usage
 1. Edit the file to contain your client id and token
 2. Call the script from the command line to test 
-e.g. php ./wheresitup.php http://github.com newyork yes
+e.g. `php ./wheresitup.php http://github.com newyork yes`
 3. Integrate with nagios
