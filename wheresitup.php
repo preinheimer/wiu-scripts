@@ -19,6 +19,9 @@ define('token', 'Auth tokens are tasty, like cookies, but without the calories')
  *      including Traceroute, Ping, and DNS lookups. While the results of these lookups
  *      aren't available in the echo'd result, the link to them is. This should help
  *      diagnose problems.
+ *
+ *      Source: https://github.com/preinheimer/wiu-scripts
+ *      Integrates with: http://api.wheresitup.com/ 
  */
 
 if(!isset($argv[1]) OR !isset($argv[2]))
