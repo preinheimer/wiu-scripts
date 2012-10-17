@@ -86,7 +86,7 @@ do {
     }
     
     
-    if($attemptCount++ == 10)
+    if(++$attemptCount == 10)
     {
         //Something may be wrong with the API
         echo "Where's it Up not responding!";
@@ -104,7 +104,7 @@ function submitJob($uri, $server, $services)
 
     $data = http_build_query(array('services' => $services, 'source' => array($server), 'uri' => $uri));
     
-    curl_setopt($ch, CURLOPT_URL, 'http://api.wheresitup.com/v0/submit');
+    curl_setopt($ch, CURLOPT_URL, 'http://adev.wheresitup.com/v0/submit');
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Auth: Bearer " . clientID . ' ' . token));
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -114,16 +114,13 @@ function submitJob($uri, $server, $services)
     $results = json_decode($ret, true);
     if(is_null($results))
     {
-        echo "API Call error.";
-        var_dump($ret);
+        echo "API Call error: $ret \n";
         exit(3);
     }
     
     if (!isset($results['jobID']))
     {
-        echo "API Call error.";
-        var_dump($ret);
-        var_dump($data);
+        echo "API Call error: $ret \n";
         exit(3);
     }
     return $results['jobID'];
