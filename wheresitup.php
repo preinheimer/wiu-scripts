@@ -104,7 +104,7 @@ function submitJob($uri, $server, $services)
 
     $data = http_build_query(array('services' => $services, 'source' => array($server), 'uri' => $uri));
     
-    curl_setopt($ch, CURLOPT_URL, 'http://adev.wheresitup.com/v0/submit');
+    curl_setopt($ch, CURLOPT_URL, 'http://api.wheresitup.com/v0/submit');
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Auth: Bearer " . clientID . ' ' . token));
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
