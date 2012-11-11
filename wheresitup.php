@@ -1,7 +1,7 @@
 <?php
 
-define('clientID', 'YOUR CLIENT ID HERE, alternately: sadness');
-define('token', 'Auth tokens are tasty, like cookies, but without the calories');
+define('clientID', "506a121ea7ec61e60605dc4d");
+define('token', "99cd47cda39ddb8e91a2cb0606dc7a6a");
 
 /*
  *  You're clearly welcome to edit what comes later, but you shouldn't need to.
@@ -50,7 +50,7 @@ do {
     unset($ch);
     $ch = curl_init();
     
-    curl_setopt($ch, CURLOPT_URL, "http://api.wheresitup.com/v0/retrieve/$jobID");
+    curl_setopt($ch, CURLOPT_URL, "http://adev.wheresitup.com/v0/retrieve/$jobID");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Auth: Bearer " . clientID . ' ' . token));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $ret = curl_exec($ch);
@@ -105,18 +105,20 @@ function submitJob($uri, $server, $services)
     
     $ch = curl_init();
 
-    $data = http_build_query(array('services' => $services, 'source' => array($server), 'uri' => $uri));
+    $data = http_build_query(array('services' => $services, 'sources' => array($server), 'uri' => $uri));
     
-    curl_setopt($ch, CURLOPT_URL, 'http://api.wheresitup.com/v0/submit');
+    curl_setopt($ch, CURLOPT_URL, 'http://adev.wheresitup.com/v1/submit');
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Auth: Bearer " . clientID . ' ' . token));
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    //curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $ret = curl_exec($ch);
     
     $results = json_decode($ret, true);
     if(is_null($results))
     {
+        echo $data;
         echo "API Call error: $ret \n";
         exit(3);
     }
