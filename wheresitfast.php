@@ -26,14 +26,16 @@ define('token', "");
 
 if(!isset($argv[1]) OR !isset($argv[2]))
 {
-    echo "Usage: {$argv[0]} <server name> <check source> <maximum acceptable time in ms>\n";
+    echo "Usage: {$argv[0]} <server name> <check source> [maximum acceptable time in ms]\n";
     echo "Example: {$argv[0]} http://example.com newyork 2500\n";
+    echo "or\n";
+    echo "Example: {$argv[0]} http://example.com newyork\n";
     exit(3);
 }
 
 $uri = $argv[1];
 $server = $argv[2];
-$maxTime = $argv[3];
+$maxTime = isset($argv[3]) ? $argv[3] : null;
 
 $jobID = submitJob($uri, $server, array('fast'));
 
@@ -61,6 +63,13 @@ do {
         {
             echo "[{$jobID}] Page load failure\n";
             return 2;
+        }
+        
+        //Handle people who just want the time, not in nagios
+        if (is_null($maxTime))
+        {
+            echo $time;
+            return 0;
         }
         
         if ($time > $maxTime)
