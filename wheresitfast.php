@@ -15,11 +15,7 @@ define('token', "");
  *      - Designed to integrate with Nagios it uses return codes 0, 2, and 3. Which
  *      represent Success, Failure, and Unknown respectively. This simple implementaiton
  *      doesn't present warn.
- *      - When the check fails it immediately requests a second check against that URL,
- *      including Traceroute, Ping, and DNS lookups. While the results of these lookups
- *      aren't available in the echo'd result, the link to them is. This should help
- *      diagnose problems.
- *
+ *      - Can also return simply the value in MS, useful for integration in other tools, like cacti
  *      Source: https://github.com/preinheimer/wiu-scripts
  *      Integrates with: http://api.wheresitup.com/ 
  */
